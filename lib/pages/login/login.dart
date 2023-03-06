@@ -40,39 +40,48 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  "Welcome$name",
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                
                 const SizedBox(
                   height: 20,
                 ),
                 //login colum and butten
                 Padding(
+                  
                   padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                      const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: "Enter Username",
-                          label: Text("Username"),
+                      Container(
+              margin: const EdgeInsets.only(bottom: 32.0),
+              child: const Text(
+                'Welcome!',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+                      Form(
+                        
+                        
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              
+                              label: Text("Email*"),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Username can not be empty";
+                              }
+                              return null;
+                            },
+                            //for state fulwiget
+                            onChanged: (value) {
+                              name = value;
+                              setState(() {});
+                            },
+                          ),
                         ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Username can not be empty";
-                          }
-                          return null;
-                        },
-                        //for state fulwiget
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
-                        },
-                      ),
                       TextFormField(
                           obscureText: true,
                           decoration: const InputDecoration(
@@ -91,15 +100,15 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                       ),
                       Material(
-                        color: Colors.deepPurple,
+                        color:const Color.fromARGB(255, 14, 2, 88),
                         borderRadius:
                             BorderRadius.circular(changeButton ? 50 : 8),
                         child: InkWell(
                           splashColor: const Color.fromARGB(255, 30, 150, 215),
-                          onTap: () => moveToHome(context),
+                          onTap: () {},
                           child: AnimatedContainer(
                             duration: const Duration(seconds: 1),
-                            width: changeButton ? 50 : 150,
+                            width: changeButton ? 50 : 300,
                             height: 50,
                             alignment: Alignment.center,
                             child: changeButton
@@ -108,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Colors.white,
                                   )
                                 : const Text(
-                                    "Login",
+                                    "Sign in",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -116,6 +125,38 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                           ),
                         ),
+                        
+                      ),
+                      const SizedBox(
+                        height: 50,
+                        child: Center(
+                          child: Text(
+                            '-------------------------------------OR-------------------------------------'
+                          ),
+                        ),
+                      ),
+                      Material(
+                        color: const Color.fromARGB(255, 14, 2, 88),
+                        borderRadius:
+                            BorderRadius.circular(changeButton ? 50 : 8),
+                        child: InkWell(
+                          splashColor: const Color.fromARGB(255, 30, 150, 215),
+                          onTap: () {},
+                          child: AnimatedContainer(
+                            duration: const Duration(seconds: 1),
+                            width: 300,
+                            height: 50,
+                            alignment: Alignment.center,
+                            child: const Text(
+                                    "Sign up",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                          ),
+                        ),
+                        
                       ),
                     ],
                   ),
