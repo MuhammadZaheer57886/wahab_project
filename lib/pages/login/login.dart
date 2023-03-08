@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Form(
         key: _formKey,
         child: Column(
+          
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
@@ -70,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 30,
             ),
-            SignInButton(context),
+            _signInButton(context),
             const Or(),
             const SignUp(),
           ],
@@ -79,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Material SignInButton(BuildContext context) {
+  Material _signInButton(BuildContext context) {
     return Material(
       color: const Color.fromARGB(255, 0, 8, 79),
       borderRadius: BorderRadius.circular(14),
