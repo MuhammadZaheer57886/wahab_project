@@ -15,24 +15,38 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  void login(String email, String password) async {
-    try {
-      Response response = await post(
-        Uri.parse('https://staging.teacheraclickaway.com/api/teacher/login'),
-        body:{
-          'email': email,
-          'password': password,
-        }
-      );
-      if(response.statusCode == 200){
-        print('respose');
-      }else{
-        print('error');
-      }
-    } catch (e){
-      print(e.toString());
+  Future<void> login(String email, String password) async {
+  try {
+    Dio dio = Dio();
+    dio.options.headers['Content-Type'] = 'application/json';
+    Response response = await dio.post(
+      'https://staging.teacheraclickaway.com/api/teacher/login',
+      data: {
+        'email': email,
+        'password': password,
+      },
+    );
+    if (response.statusCode == 200) {
+      // Login successful
+      print('Login successful!');
+    } else {
+      // Login failed
+      print('Login failed!');
     }
+  } on DioError catch (e) {
+    // Catch Dio errors
+    if (e.response != null) {
+      // Handle errors with response data
+      print('Dio error: ${e.response!.data}');
+    } else {
+      // Handle other Dio errors
+      print('Dio error: ${e.message}');
+    }
+  } catch (e) {
+    // Catch other errors
+    print('Error: $e');
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             return null;
                           },
-                            obscureText: _obscureText,
+                            
                             decoration:  InputDecoration(
                               label: const Text("Password"),
                               suffixIcon: InkWell(
@@ -103,10 +117,13 @@ class _LoginPageState extends State<LoginPage> {
                                             });
                                        
                                        },
+                                       
                                         child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
                             ),
                             ),
+                            obscureText: _obscureText,
                             ),
+                            
                       ),
                         const SizedBox(
                         height: 20,
@@ -137,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 12),
+                                        fontSize: 14),
                                   ),
                           ),
                         ),
@@ -146,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 70,
                         child: Center(
                           child: Text(
-                              '--------------------------------OR--------------------------------'),
+                              '------------------OR---------------------'),
                         ),
                       ),
                       Material(
@@ -160,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                               context, 
                               MaterialPageRoute(
                                 builder: (context){
-                                  return const SignUpPage();
+                                  return const SignupPage();
                                   },
                                   ),
                                   );
@@ -175,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 12),
+                                  fontSize: 14),
                             ),
                           ),
                         ),
