@@ -54,27 +54,27 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 50,
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                const _Head(),
+                Email(emailController: emailController),
+                _password(),
+                const ForgotPassword(),
+                const SizedBox(
+                  height: 30,
+                ),
+                _signInButton(context),
+                const Or(),
+                const SignUp(),
+              ],
             ),
-            const _Head(),
-            Email(emailController: emailController),
-            _password(),
-            const ForgotPassword(),
-            const SizedBox(
-              height: 30,
-            ),
-            _signInButton(context),
-            const Or(),
-            const SignUp(),
-          ],
+          ),
         ),
       ),
     );
